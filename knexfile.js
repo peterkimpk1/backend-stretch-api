@@ -37,11 +37,10 @@ module.exports = {
   production: {
     client: 'pg',
     connection: {
-      host: '127.0.0.1',  
-      port: 5432,  
-      user: 'postgres',  
-      password: 'your-production-password',  
-      database: 'postgres' 
+      host: process.env.POSTGRES_HOST,
+      user: process.env.POSTGRES_USER,
+      password: process.env.POSTGRES_PASSWORD,
+      database: process.env.POSTGRES_DATABASE
     }
   }
 };

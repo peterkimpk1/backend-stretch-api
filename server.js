@@ -6,6 +6,7 @@ const environment = process.env.NODE_ENV || 'development';
 const configuration = require('./knexfile')[environment];
 const database = require('knex')(configuration);
 const cors = require('cors');
+
 app.use(cors());
 
 app.get('/foodnames', async (req,res) => {
@@ -28,4 +29,5 @@ app.get('/foodnames', async (req,res) => {
 
 app.listen(PORT, () => {
     console.log(`Listening on port: ${PORT}`)
+    console.log(`Current environment: ${process.env.NODE_ENV}`)
 })

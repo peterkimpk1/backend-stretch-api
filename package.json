@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec babel-node server.js",
-    "dev": "knex migrate:latest && knex seed:run"
+    "dev": "knex migrate:latest && knex seed:run",
+    "start prod": "NODE_ENV=production node server.js"
   },
   "keywords": [],
   "author": "",
