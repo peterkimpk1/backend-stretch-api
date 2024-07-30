@@ -11,7 +11,7 @@ app.use(cors());
 
 const allowCors = fn => async (req, res) => {
     res.setHeader('Access-Control-Allow-Credentials', true)
-    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Access-Control-Allow-Origin', req.headers.origin)
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
     res.setHeader(
       'Access-Control-Allow-Headers',
@@ -36,7 +36,7 @@ const getFoodNames = async (req, res) => {
                 .limit(50)
             
             .whereRaw('f.fdc_id = b.fdc_id')
-            res.status(200).json(foodCategory)
+            res.status(200).send(foodCategory)
     } catch(error) {
         res.status(500).json({error})
     } 
@@ -45,4 +45,4 @@ app.listen(PORT, () => {
     console.log(`Listening on port: ${PORT}`)
     console.log(`Current environment: ${process.env.NODE_ENV}`)
 })
-app.get('/foodnames', allowCors(getFoodNames));
+app.get("/foodnames", allowCors(getFoodNames));
