@@ -23,15 +23,8 @@ const allowCors = fn => async (req, res) => {
     }
     return await fn(req, res)
   }
-  
-const handler = (req, res) => {
-const d = new Date()
-res.end(d.toString())
-}
-  
 
-  
-app.get('/foodnames', async (req,res) => {
+const getFoodNames = async (req, res) => {
     try {
         const foodCategory = await sql('branded_food_table as b')
             .join('food_table as f', 'b.fdc_id', 'f.fdc_id')
@@ -47,11 +40,9 @@ app.get('/foodnames', async (req,res) => {
     } catch(error) {
         res.status(500).json({error})
     } 
-})
-
+}
 app.listen(PORT, () => {
     console.log(`Listening on port: ${PORT}`)
     console.log(`Current environment: ${process.env.NODE_ENV}`)
 })
-
-module.exports = allowCors(handler)
+app.get('/foodnames', allowCors(getFoodNames));
