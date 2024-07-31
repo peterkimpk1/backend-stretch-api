@@ -1,4 +1,3 @@
-import { sql } from "@vercel/postgres";
 const express = require('express');
 const PORT = process.env.PORT || 3001 ;
 const knex = require('./knex/knex.js')
@@ -14,9 +13,11 @@ const corsOption = {
 }
 app.use(cors(corsOption))
 app.use(express.json())
+
+
 app.get("/foodnames", async (req, res) => {
     try {
-        const foodCategory = await sql('branded_food_table as b')
+        const foodCategory = await database('branded_food_table as b')
             .join('food_table as f', 'b.fdc_id', 'f.fdc_id')
             .select('b.fdc_id', 'b.brand_name', 'b.ingredients', 'b.serving_size', 
                 'b.serving_size_unit', 
