@@ -38,3 +38,4 @@ app.listen(PORT, () => {
     console.log(`Current environment: ${process.env.NODE_ENV}`)
 })
 
+module.exports = app;
